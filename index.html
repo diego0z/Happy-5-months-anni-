@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heaven is a Bedroom • Kyay Lay ❤️</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Padauk', 'Pyidaungsu', sans-serif;
+            background: #0a0a0c;
+            color: #e0e0e0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* Spiderweb overlay backgrounds */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 0),
+                radial-gradient(rgba(186, 45, 68, 0.1) 2px, transparent 0);
+            background-size: 20px 20px, 40px 40px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .card-container {
+            background: rgba(15, 15, 20, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            width: 100%;
+            max-width: 500px;
+            border-radius: 24px;
+            padding: 35px 25px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(186, 45, 68, 0.2);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Screen 1: The Entrance Gate */
+        #gate-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 0;
+        }
+
+        .heart-icon {
+            font-size: 65px;
+            color: #ba2d44;
+            margin-bottom: 25px;
+            animation: pulse 1.6s infinite;
+            cursor: pointer;
+            filter: drop-shadow(0 0 15px rgba(186, 45, 68, 0.6));
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(186, 45, 68, 0.5)); }
+            50% { transform: scale(1.08); filter: drop-shadow(0 0 25px rgba(186, 45, 68, 0.8)); }
+            100% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(186, 45, 68, 0.5)); }
+        }
+
+        h1 {
+            font-size: 20pt;
+            color: #f5f5f5;
+            margin-bottom: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        p {
+            font-size: 10.5pt;
+            line-height: 1.6;
+            color: #a0a0aa;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #ba2d44 0%, #781d2b 100%);
+            color: #ffffff;
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 14px 35px;
+            font-size: 11pt;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(186, 45, 68, 0.4);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(186, 45, 68, 0.6);
+            background: linear-gradient(135deg, #d4354f 0%, #912334 100%);
+        }
+
+        /* Screen 2: Main Interface */
+        #main-screen {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .ticker-title {
+            font-size: 10pt;
+            color: #ba2d44;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .timer-container {
+            background: rgba(20, 20, 25, 0.9);
+            border-radius: 14px;
+            padding: 18px 10px;
+            margin: 20px 0 30px 0;
+            border: 1px solid rgba(186, 45, 68, 0.2);
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .time-block {
+            flex: 1;
+        }
+
+        .time-num {
+            font-size: 18pt;
+            font-weight: 700;
+            color: #ff3b57;
+            display: block;
+            text-shadow: 0 0 10px rgba(255, 59, 87, 0.3);
+        }
+
+        .time-label {
+            font-size: 7.5pt;
+            color: #71717a;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        /* Interactive Photo Album Grid */
+        .album-container {
+            margin: 25px 0;
+            text-align: left;
+        }
+
+        .album-title {
+            font-size: 11pt;
+            color: #a0a0aa;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-left: 3px solid #ba2d44;
+            padding-left: 8px;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .photo-item {
+            position: relative;
+            aspect-ratio: 1 / 1;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(20%) contrast(110%);
+            transition: all 0.4s ease;
+        }
+
+        .photo-item:hover {
+            transform: scale(1.05);
+            border-color: #ba2d44;
+            box-shadow: 0 0 12px rgba(186, 45, 68, 0.5);
+        }
+
+        .photo-item:hover img {
+            filter: grayscale(0%) contrast(100%);
+        }
+
+        /* Lightbox for viewing photos */
+        .lightbox {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(5, 5, 5, 0.95);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 12px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.8), 0 0 2px #ba2d44;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px; right: 20px;
+            color: #fff;
+            font-size: 30px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* Message Letter Box */
+        .letter-container {
+            text-align: left;
+            margin-top: 25px;
+        }
+
+        .letter-text {
+            line-height: 1.8;
+            color: #d4d4d8;
+            background: #121216;
+            padding: 22px;
+            border-radius: 14px;
+            border-left: 4px solid #ba2d44;
+            font-size: 11.5pt;
+            white-space: pre-line;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        .footer-note {
+            margin-top: 35px;
+            font-size: 8.5pt;
+            color: #52525b;
+            letter-spacing: 0.5px;
+        }
+
+        /* Corner Floating Lyrics */
+        .floating-lyric {
+            position: fixed;
+            color: rgba(255, 255, 255, 0.12);
+            font-size: 9.5pt;
+            font-style: italic;
+            font-weight: 300;
+            pointer-events: none;
+            z-index: 1;
+            max-width: 200px;
+            line-height: 1.4;
+            transition: all 1s ease;
+        }
+
+        .audio-status {
+            font-size: 8pt;
+            color: #52525b;
+            margin-top: 10px;
+        }
+
+        /* Particle Emo/Goth rain elements */
+        .rain-particle {
+            position: absolute;
+            pointer-events: none;
+            z-index: 2;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Embedded Audio Element for TV Girl -->
+    <audio id="bg-music" loop>
+        <source src="https://archive.org/download/tv-girl-heaven-is-a-bedroom/TV%20Girl%20-%20Heaven%20Is%20a%20Bedroom.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Corner Floating Lyrics Layout Positions -->
+    <div class="floating-lyric" style="top: 25px; left: 25px; text-align: left;" id="lyric-tl"></div>
+    <div class="floating-lyric" style="top: 25px; right: 25px; text-align: right;" id="lyric-tr"></div>
+    <div class="floating-lyric" style="bottom: 25px; left: 25px; text-align: left;" id="lyric-bl"></div>
+    <div class="floating-lyric" style="bottom: 25px; right: 25px; text-align: right;" id="lyric-br"></div>
+
+    <div class="card-container" id="card">
+        
+        <!-- SCREEN 1: Welcome/Gate -->
+        <div id="gate-screen">
+            <div class="heart-icon" onclick="unlockSite()">🖤</div>
+            <h1>Happy 5 months anni ပါကလေးရေ</h1>
+            <p>I built a dark alternative space just for us to celebrate our 5 months milestone. Tap below to turn on "Heaven is a Bedroom" and open it.</p>
+            <button class="btn" onclick="unlockSite()">Enter Our Space</button>
+        </div>
+
+        <!-- SCREEN 2: Main Screen Dashboard -->
+        <div id="main-screen">
+            <div class="ticker-title">5 Months & Counting</div>
+            <h1>Together Forever</h1>
+            
+            <!-- Live Ticker Counter -->
+            <div class="timer-container">
+                <div class="time-block">
+                    <span class="time-num" id="days">00</span>
+                    <span class="time-label">Days</span>
+                </div>
+                <div class="time-block">
+                    <span class="time-num" id="hours">00</span>
+                    <span class="time-label">Hours</span>
+                </div>
+                <div class="time-block">
+                    <span class="time-num" id="minutes">00</span>
+                    <span class="time-label">Mins</span>
+                </div>
+                <div class="time-block">
+                    <span class="time-num" id="seconds">00</span>
+                    <span class="time-label">Secs</span>
+                </div>
+            </div>
+
+            <!-- Interactive Photo Album Grid -->
+            <div class="album-container">
+                <div class="album-title">Our Gallery 🖤</div>
+                <div class="photo-grid">
+                    <div class="photo-item" onclick="openLightbox('3783.jpg')"><img src="3783.jpg" alt="Photo"></div>
+                    <div class="photo-item" onclick="openLightbox('3757.jpg')"><img src="3757.jpg" alt="Photo"></div>
+                    <div class="photo-item" onclick="openLightbox('3667.jpg')"><img src="3667.jpg" alt="Photo"></div>
+                    <div class="photo-item" onclick="openLightbox('2578.jpg')"><img src="2578.jpg" alt="Photo"></div>
+                    <div class="photo-item" onclick="openLightbox('1584.jpg')"><img src="1584.jpg" alt="Photo"></div>
+                    <div class="photo-item" onclick="openLightbox('760.png')"><img src="760.png" alt="Photo"></div>
+                    <div class="photo-item" onclick="openLightbox('4615.jpg')"><img src="4615.jpg" alt="Photo"></div>
+                </div>
+            </div>
+
+            <!-- Custom Letter Box -->
+            <div class="letter-container">
+                <div class="letter-text">ကလေးလေးရေ happy 5 months anniversary ပါ‌နော်။ ကိုကိုတို့နှစ်ယောက်တွဲလာတာ နှစ်၀က်လောက်တောင်ဖြစ်တော့မယ် ကိုကိုကလေးကိုလေ အချိန်တိုင်းလွမ်းနေရတာ။ ကလေးကဖုန်းသုံးမရတာကိုတော့ ကိုကိုကနားလည်ပါတယ်။ အာ့ကြောင့် လည်း ကိုကိုနဲ့စကားမပြောရလို့ ကိုကို့ကိုစိတ်မပျက်သွားနဲ့‌နော် ကိုကိုလည်းကလေးကိုစိတ်မပျက်ဘူး။ ကိုကိုလည်းအားရင်အားသလို ကလေးလေးကို စာလာပို့မယ်နော်။
+
+ကိုကိုပြောချင်တာက ကိုကိုကလေးလေးနဲ့ လက်ထက်တဲ့အထိမြဲချင်တယ် ကိုကိုကလေးလေးနဲ့တစ်သက်လုံးတူတူရှိချင်တယ်ပြီးတော့ ကိုကိုကလေးလေးကိုတစ်သက်လုံးချစ်သွားချင်တယ်။
+
+ကိုကို မသိဘဲကျူးလွန်မိတဲ့ အမှားတွေကိုလည်းခွင့်လွှတ်ပေးပါနော် အဲ့အမှားတွေကိုလည်းပြင်လို့ ရအောင်ကိုကို့ ကိုပြောပြပေးပါနော်။ ကိုကိုကလေးလေးနဲ့ထပ်မဝေးနိုင်တော့သလို ကလေးကိုလည်းစိတ်မညစ်စေတော့ဘူးနော်။ 🖤</div>
+            </div>
+
+            <div class="audio-status">♫ Playing: Heaven is a Bedroom - TV Girl</div>
+            <div class="footer-note">Made with love • 🖤🕷️🕸️</div>
+        </div>
+
+    </div>
+
+    <!-- Lightbox Element -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <img id="lightbox-img" src="" alt="Enlarged view">
+    </div>
+
+    <script>
+        // Exact anniversary start date: February 9, 2026
+        const anniversaryStartDate = new Date(2026, 1, 9, 0, 0, 0);
+
+        // TV Girl Lyrics Array to rotate across corners
+        const lyricsArray = [
+            "And tech-color glows...",
+            "But heaven is a bedroom...",
+            "When you don't want to go outside...",
+            "She doesn't want to change your mind...",
+            "Just close your eyes...",
+            "And let the world slip away...",
+            "With black lace and silver lines...",
+            "No one can hurt us here..."
+        ];
+
+        function unlockSite() {
+            // Play Audio
+            const audio = document.getElementById('bg-music');
+            audio.play().catch(err => console.log("Audio play blocked until click."));
+
+            // Toggle screens
+            document.getElementById('gate-screen').style.display = 'none';
+            const mainScreen = document.getElementById('main-screen');
+            mainScreen.style.display = 'block';
+            setTimeout(() => {
+                mainScreen.style.opacity = '1';
+                mainScreen.style.transform = 'translateY(0)';
+            }, 50);
+
+            startLiveTimer();
+            startDarkRain();
+            cycleLyrics();
+            setInterval(cycleLyrics, 4500);
+        }
+
+        function startLiveTimer() {
+            function updateCounter() {
+                const now = new Date();
+                const diff = now - anniversaryStartDate;
+
+                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+                document.getElementById('days').innerText = String(d).padStart(2, '0');
+                document.getElementById('hours').innerText = String(h).padStart(2, '0');
+                document.getElementById('minutes').innerText = String(m).padStart(2, '0');
+                document.getElementById('seconds').innerText = String(s).padStart(2, '0');
+            }
+            updateCounter();
+            setInterval(updateCounter, 1000);
+        }
+
+        // Lightbox Functions
+        function openLightbox(imgSrc) {
+            const lb = document.getElementById('lightbox');
+            const lbImg = document.getElementById('lightbox-img');
+            lbImg.src = imgSrc;
+            lb.classList.add('active');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        // Rotate Lyrics in corners dynamically
+        function cycleLyrics() {
+            const corners = ['lyric-tl', 'lyric-tr', 'lyric-bl', 'lyric-br'];
+            
+            corners.forEach(id => {
+                document.getElementById(id).style.opacity = '0';
+            });
+
+            setTimeout(() => {
+                let shuffledCorners = corners.sort(() => 0.5 - Math.random());
+                let pickedLyrics = lyricsArray.sort(() => 0.5 - Math.random());
+
+                for(let i = 0; i < 2; i++) {
+                    let el = document.getElementById(shuffledCorners[i]);
+                    el.innerText = pickedLyrics[i];
+                    el.style.opacity = '1';
+                }
+            }, 1000);
+        }
+
+        // Spiderwebs, Black Hearts, Sparkles falling rain
+        function startDarkRain() {
+            const elements = ['🖤', '🕷️', '🕸️', '✨'];
+            setInterval(() => {
+                const particle = document.createElement('div');
+                particle.classList.add('rain-particle');
+                particle.innerText = elements[Math.floor(Math.random() * elements.length)];
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.top = '-40px';
+                particle.style.fontSize = (Math.random() * 12 + 12) + 'px';
+                
+                const duration = Math.random() * 3 + 4;
+                particle.style.animationDuration = duration + 's';
+                
+                document.body.appendChild(particle);
+                
+                setTimeout(() => {
+                    particle.remove();
+                }, duration * 1000);
+            }, 800);
+        }
+    </script>
+</body>
+</html>
